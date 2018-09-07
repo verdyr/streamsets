@@ -10,7 +10,8 @@ ENV JAVA_VERSION_MAJOR=8 \
 RUN yum install -y less more git wget curl httpd java-1.${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR} maven unzip make which nano vim gdb gcc strace route iproute traceroute ethtool net-tools && yum -q clean all
 
 RUN cd /usr/share && \
-    curl --fail --silent --location --retry 3 \
+#    curl --fail --silent --location --retry 3 \
+    wget -v \
     https://services.gradle.org/distributions/gradle-${GRADLE_VERSION_MAJOR}.${GRADLE_VERSION_MINOR}-bin.zip \
     unzip gradle-${GRADLE_VERSION_MAJOR}.${GRADLE_VERSION_MINOR}-bin.zip && \
     rm gradle-${GRADLE_VERSION_MAJOR}.${GRADLE_VERSION_MINOR}-bin.zip
