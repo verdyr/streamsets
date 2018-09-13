@@ -19,6 +19,8 @@ LABEL df.os=centos7 df.version=0.0.1 df.client_version=0.0.1
 
 #COPY df_client_setup.sh /opt/df/setup/df_client_setup.sh 
 
+# tst comment here
+
 RUN useradd verdyr
 
 RUN  su - verdyr && \
