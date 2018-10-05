@@ -10,7 +10,7 @@ ENV JAVA_VERSION_MAJOR=8 \
     SBT_VERSION_MINOR=2 \
     SBT_VERSION_MINOR_MINOR=2
 
-RUN yum install -y less more git wget curl httpd java-1.${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR} maven unzip make which nano vim gdb gcc strace route iproute traceroute ethtool net-tools && yum -q clean all
+RUN yum install -y less more git wget curl httpd java-1.${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR} maven unzip make which nano vim gdb gcc strace route iproute traceroute ethtool net-tools nfs-utils && yum -q clean all
 
 RUN cd /usr/share && \
 #    curl --fail --silent --location --retry 3 \
