@@ -1,6 +1,42 @@
 FROM       docker.io/centos:centos7.5.1804
 MAINTAINER verdyr
 
+#Available Environment Groups:
+#   Minimal Install
+#   Compute Node
+#   Infrastructure Server
+#   File and Print Server
+#   Cinnamon Desktop
+#   MATE Desktop
+#   Basic Web Server
+#   Virtualization Host
+#   Server with GUI
+#   GNOME Desktop
+#   KDE Plasma Workspaces
+#   Development and Creative Workstation
+#Available Groups:
+#   Cinnamon
+#   Compatibility Libraries
+#   Console Internet Tools
+#   Development Tools
+#   Educational Software
+#   Electronic Lab
+#   Fedora Packager
+#   General Purpose Desktop
+#   Graphical Administration Tools
+#   Haskell
+#   Legacy UNIX Compatibility
+#   MATE
+#   Milkymist
+#   Scientific Support
+#   Security Tools
+#   Smart Card Support
+#   System Administration Tools
+#   System Management
+#   TurboGears application framework
+#   Xfce
+
+
 ENV JAVA_VERSION_MAJOR=8 \
     JAVA_VERSION_MINOR=0 \
     JAVA_VERSION_BUILD=141 \
