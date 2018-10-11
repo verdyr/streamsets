@@ -71,9 +71,10 @@ LABEL df.os=centos7 df.version=0.0.1 df.client_version=0.0.1
 
 RUN useradd verdyr
 
-RUN  su - verdyr && \
-     cd && \
-     wget -v http://archive.mapr.com/releases/v6.0.1/redhat/mapr-client-6.0.1.20180404222005.GA-1.x86_64.rpm
+## mapr specific, separately
+RUN  yum install -y http://archive.mapr.com/releases/v6.0.1/redhat/mapr-librdkafka-0.11.3.201803231414-1.noarch.rpm
+RUN  yum install -y http://archive.mapr.com/releases/v6.0.1/redhat/mapr-client-6.0.1.20180404222005.GA-1.x86_64.rpm
+
 
 ENV JAVA_MAX_MEM=1200m \
     JAVA_MIN_MEM=1200m
