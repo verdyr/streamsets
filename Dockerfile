@@ -44,7 +44,15 @@ ENV JAVA_VERSION_MAJOR=8 \
     GRADLE_VERSION_MINOR=10 \
     SBT_VERSION_MAJOR=1 \
     SBT_VERSION_MINOR=2 \
-    SBT_VERSION_MINOR_MINOR=2
+    SBT_VERSION_MINOR_MINOR=2 \
+    MAPR_HOME=/opt/mapr \
+    MAPR_MEP_VERSION=5 \
+    MAPR_VERSION=6.0.0 \
+    MAPR_TICKETFILE_LOCATION=/opt/mapr/conf/mapruserticket \
+    SDC_CONF=/etc/sdc \
+    SDC_CONF_HTTPS_PORT=7443 \
+    SDC_HOME=/opt/streamsets-datacollector \
+    
 
 RUN yum install -y epel-release
 
@@ -73,7 +81,12 @@ RUN useradd verdyr
 
 ## mapr specific, separately
 RUN  yum install -y http://archive.mapr.com/releases/v6.0.1/redhat/mapr-librdkafka-0.11.3.201803231414-1.noarch.rpm
-RUN  yum install -y http://archive.mapr.com/releases/v6.0.1/redhat/mapr-client-6.0.1.20180404222005.GA-1.x86_64.rpm
+RUN  yum install -y http://archive.mapr.com/releases/v6.0.1/redhat/mapr-client-6.1.0.20180926230239.GA-1.x86_64.rpm
+
+RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.2/rpm/el7/streamsets-datacollector-3.5.2-el7-all-rpms.tar
+RUN tar xf streamsets-datacollector-3.5.2-el7-all-rpms.tar && rm -rf streamsets-datacollector-3.5.2-el7-all-rpms.tar && cd streamsets-datacollector-3.5.2-el7-all-rpms
+RUN yum localinstall -y streamsets-datacollector-*.rpm
+
 
 
 ENV JAVA_MAX_MEM=1200m \
