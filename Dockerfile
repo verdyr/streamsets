@@ -84,14 +84,11 @@ RUN useradd verdyr
 RUN yum install -y http://archive.mapr.com/releases/v${MAPR_CLUSTER_VERSION}/redhat/mapr-librdkafka-0.11.3.201803231414-1.noarch.rpm
 RUN yum install -y http://archive.mapr.com/releases/v${MAPR_CLUSTER_VERSION}/redhat/mapr-client-6.1.0.20180926230239.GA-1.x86_64.rpm
 
-RUN cd /tmp/ && \
-    wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.2/rpm/el7/streamsets-datacollector-3.5.2-el7-all-rpms.tar
-RUN tar xf streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
+RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.2/rpm/el7/streamsets-datacollector-3.5.2-el7-all-rpms.tar && \
+    tar xf streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
     rm streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
-    cd streamsets-datacollector-3.5.2-el7-all-rpms
-RUN yum localinstall -y streamsets-datacollector-*.rpm
-
-
+    cd streamsets-datacollector-3.5.2-el7-all-rpms && \
+    yum localinstall -y streamsets-datacollector-*.rpm
 
 ENV JAVA_MAX_MEM=1200m \
     JAVA_MIN_MEM=1200m
