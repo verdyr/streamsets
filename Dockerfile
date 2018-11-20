@@ -88,8 +88,9 @@ RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacolle
     tar xf streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
     rm streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
     cd streamsets-datacollector-3.5.2-el7-all-rpms && \
-    rm streamsets-datacollector-*cdh*.rpm streamsets-datacollector-*hdp*.rpm && \
-    yum localinstall -y streamsets-datacollector-*.rpm
+    rm -f streamsets-datacollector-cdh*.rpm streamsets-datacollector-hdp*.rpm && \
+    yum localinstall -y streamsets-datacollector-*.rpm && \
+    cd ../ && rm -rf streamsets-datacollector-3.5.2-el7-all-rpms
 
 ENV JAVA_MAX_MEM=1200m \
     JAVA_MIN_MEM=1200m
