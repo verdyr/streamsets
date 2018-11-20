@@ -72,7 +72,7 @@ RUN yum install -y systemd less more wget curl httpd java-1.${JAVA_VERSION_MAJOR
 
 # Path to update, TODO
 
-LABEL df.os=centos7 df.version=0.0.1 df.client_version=0.0.1
+LABEL df.os=centos7 df.version=0.0.1 df.client_version=0.0.3
 
 #COPY df_client_setup.sh /opt/df/setup/df_client_setup.sh 
 
@@ -88,6 +88,7 @@ RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacolle
     tar xf streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
     rm streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
     cd streamsets-datacollector-3.5.2-el7-all-rpms && \
+    rm streamsets-datacollector-*cdh*.rpm streamsets-datacollector-*hdp*.rpm && \
     yum localinstall -y streamsets-datacollector-*.rpm
 
 ENV JAVA_MAX_MEM=1200m \
