@@ -9,7 +9,7 @@ Then, run the container:
 1. docker run --restart on-failure -it -v /local/path/to/{mapruserticket,ssl_truststore}:/mnt -v /mapr/${cluster_name}/apps/streamsets/libs/:/opt/streamsets-datacollector-3.5.0/streamsets-libs -v /mapr/${cluster_name}/apps/streamsets/data/:/data:rw -e SDC_CONF_HTTPS_PORT=7443 -e MAPR_HOME=/opt/mapr -p 7443:7443 -p 18630:18630 verdyr/streamsets
 2. then, once in 
 
-  2.a echo "cldb1_IP  cldb1_FQDN \ cldb2_IP  cldb2_FQDN \ cldb3_IP  cldb3_FQDN" >> /etc/hosts
+  2.a echo -e "\nCLDB1_IP  CLDB1_FQDN \nCLDB2_IP  CLDB2_FQDN \nCLDB3_IP  CLDB3_FQDN" >> /etc/hosts
   
   2.b export MAPR_TICKETFILE_LOCATION=/mnt/{mapruserticket}
   
