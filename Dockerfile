@@ -35,7 +35,7 @@ MAINTAINER verdyr
 #   System Management
 #   TurboGears application framework
 #   Xfce
-
+ARG SDC_USER=sdc 
 
 ENV JAVA_VERSION_MAJOR=8 \
     JAVA_VERSION_MINOR=0 \
@@ -47,12 +47,15 @@ ENV JAVA_VERSION_MAJOR=8 \
     SBT_VERSION_MINOR_MINOR=2 \
     MAPR_HOME=/opt/mapr \
     MAPR_MEP_VERSION=5 \
-    MAPR_VERSION=6.0.0 \
+    MAPR_VERSION=6.0.1 \
     MAPR_CLUSTER_VERSION=6.1.0 \
     MAPR_TICKETFILE_LOCATION=/opt/mapr/conf/mapruserticket \
     SDC_CONF=/etc/sdc \
     SDC_CONF_HTTPS_PORT=7443 \
-    SDC_HOME=/opt/streamsets-datacollector
+    SDC_HOME=/opt/streamsets-datacollector \ 
+    SDC_DATA=/data \ 
+    SDC_DIST="/opt/streamsets-datacollector" \ 
+    STREAMSETS_LIBRARIES_EXTRA_DIR="${SDC_DIST}/streamsets-libs-extras"
     
 
 RUN yum install -y epel-release
@@ -80,6 +83,10 @@ LABEL df.os=centos7 df.version=0.0.1 df.client_version=0.0.3
 
 RUN useradd verdyr
 
+RUN addgroup -S ${SDC_USER} && \
+    adduser -S ${SDC_USER} ${SDC_USER}
+
+
 ## mapr specific, separately
 RUN yum install -y http://archive.mapr.com/releases/v${MAPR_CLUSTER_VERSION}/redhat/mapr-librdkafka-0.11.3.201803231414-1.noarch.rpm
 RUN yum install -y http://archive.mapr.com/releases/v${MAPR_CLUSTER_VERSION}/redhat/mapr-client-6.1.0.20180926230239.GA-1.x86_64.rpm
@@ -92,7 +99,14 @@ RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacolle
     yum localinstall -y streamsets-datacollector-*.rpm && \
     cd ../ && rm -rf streamsets-datacollector-3.5.2-el7-all-rpms
 
+RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_DIST}/etc/sdc-log4j.properties"
+RUN ${SDC_DIST}/bin/streamsets setup-mapr
+
 ENV JAVA_MAX_MEM=1200m \
     JAVA_MIN_MEM=1200m
 
-CMD ["/bin/bash"]
+USER ${SDC_USER}
+
+#COPY docker-entrypoint.sh /
+#ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["dc", "-exec"]
