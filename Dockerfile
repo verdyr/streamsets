@@ -99,7 +99,7 @@ RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacolle
     yum localinstall -y streamsets-datacollector-*.rpm && \
     cd ../ && rm -rf streamsets-datacollector-3.5.2-el7-all-rpms
 
-RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_DIST}/etc/sdc-log4j.properties"
+#RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_DIST}/etc/sdc-log4j.properties"
 RUN ${SDC_DIST}/bin/streamsets setup-mapr
 
 ENV JAVA_MAX_MEM=1200m \
