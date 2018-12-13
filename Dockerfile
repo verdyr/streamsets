@@ -83,8 +83,8 @@ LABEL df.os=centos7 df.version=0.0.1 df.client_version=0.0.3
 
 RUN useradd verdyr
 
-RUN groupadd -S ${SDC_USER} && \
-    adduser -S ${SDC_USER} ${SDC_USER}
+RUN groupadd ${SDC_USER} && \
+    adduser -m ${SDC_USER} ${SDC_USER}
 
 
 ## mapr specific, separately
