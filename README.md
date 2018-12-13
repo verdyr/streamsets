@@ -7,6 +7,7 @@ For the k8s deployment, use streamsets-stateful.yaml in this repo.
 
 Then, run the container:
 * ``` docker run --restart on-failure -it -v /local/path/to/{mapruserticket,ssl_truststore}:/mnt -v /mapr/${cluster_name}/apps/streamsets/libs/:/opt/streamsets-datacollector-3.5.0/streamsets-libs -v /mapr/${cluster_name}/apps/streamsets/data/:/data:rw -e SDC_CONF_HTTPS_PORT=7443 -e MAPR_HOME=/opt/mapr -p 7443:7443 -p 18630:18630 verdyr/streamsets ```
+
 then, from container (replace fqdns)
 
 * ``` echo -e "\nCLDB1_IP  CLDB1_FQDN \nCLDB2_IP  CLDB2_FQDN \nCLDB3_IP  CLDB3_FQDN" >> /etc/hosts ```
