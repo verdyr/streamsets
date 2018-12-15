@@ -55,7 +55,6 @@ ENV JAVA_VERSION_MAJOR=8 \
     SDC_HOME=/opt/streamsets-datacollector \ 
     SDC_DATA=/data \ 
     SDC_DIST="/opt/streamsets-datacollector" \
-    SDC_CONF_HTTPS_PORT=7443 \
     STREAMSETS_LIBRARIES_EXTRA_DIR="${SDC_DIST}/streamsets-libs-extras"
     
 
@@ -100,6 +99,9 @@ RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacolle
     yum localinstall -y streamsets-datacollector-*.rpm && \
     cd ../ && rm -rf streamsets-datacollector-3.5.2-el7-all-rpms
 
+RUN cd /tmp && \
+    git clone https://github.com/verdyr/streamsets.git && \
+    
 #RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_DIST}/etc/sdc-log4j.properties"
 RUN ${SDC_DIST}/bin/streamsets setup-mapr
 
@@ -107,7 +109,7 @@ ENV JAVA_MAX_MEM=1200m \
     JAVA_MIN_MEM=1200m
 
 USER ${SDC_USER}
-
+EXPOSE 7443
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["dc", "-exec"]
