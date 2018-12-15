@@ -60,7 +60,7 @@ ENV JAVA_VERSION_MAJOR=8 \
 
 RUN yum install -y epel-release
 
-RUN yum install -y systemd less more wget curl httpd java-1.${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR} unzip which nano vim strace route iproute traceroute ethtool net-tools nfs-utils && yum -q clean all
+RUN yum install -y systemd less more wget curl httpd java-1.${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR} git unzip which nano vim strace route iproute traceroute ethtool net-tools nfs-utils && yum -q clean all
 
 #RUN cd /usr/share && \
 #    curl --fail --silent --location --retry 3 \
