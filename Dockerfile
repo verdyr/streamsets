@@ -54,7 +54,8 @@ ENV JAVA_VERSION_MAJOR=8 \
     SDC_CONF_HTTPS_PORT=7443 \
     SDC_HOME=/opt/streamsets-datacollector \ 
     SDC_DATA=/data \ 
-    SDC_DIST="/opt/streamsets-datacollector" \ 
+    SDC_DIST="/opt/streamsets-datacollector" \
+    SDC_CONF_HTTPS_PORT=7443 \
     STREAMSETS_LIBRARIES_EXTRA_DIR="${SDC_DIST}/streamsets-libs-extras"
     
 
@@ -107,6 +108,6 @@ ENV JAVA_MAX_MEM=1200m \
 
 USER ${SDC_USER}
 
-#COPY docker-entrypoint.sh /
-#ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["dc", "-exec"]
