@@ -108,7 +108,7 @@ RUN ${SDC_DIST}/bin/streamsets setup-mapr
 ENV JAVA_MAX_MEM=1200m \
     JAVA_MIN_MEM=1200m
 
-USER ${SDC_USER}
+USER verdyr
 EXPOSE 7443
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
