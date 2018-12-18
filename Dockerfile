@@ -55,12 +55,13 @@ ENV JAVA_VERSION_MAJOR=8 \
     SDC_HOME=/opt/streamsets-datacollector \ 
     SDC_DATA=/data \ 
     SDC_DIST="/opt/streamsets-datacollector" \
-    STREAMSETS_LIBRARIES_EXTRA_DIR="${SDC_DIST}/streamsets-libs-extras"
+    STREAMSETS_LIBRARIES_EXTRA_DIR="${SDC_DIST}/streamsets-libs-extras" \
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/mapr/lib
     
 
 RUN yum install -y epel-release
 
-RUN yum install -y systemd less more wget curl httpd java-1.${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR} git unzip which nano vim strace route iproute traceroute ethtool net-tools nfs-utils && yum -q clean all
+RUN yum install -y systemd less more wget curl httpd java-1.${JAVA_VERSION_MAJOR}.${JAVA_VERSION_MINOR} git unzip which nano vim strace route iproute traceroute ethtool net-tools nfs-utils python-devel && yum -q clean all
 
 #RUN cd /usr/share && \
 #    curl --fail --silent --location --retry 3 \
@@ -90,6 +91,7 @@ RUN groupadd ${SDC_USER}
 ## mapr specific, separately
 RUN yum install -y http://archive.mapr.com/releases/v${MAPR_CLUSTER_VERSION}/redhat/mapr-librdkafka-0.11.3.201803231414-1.noarch.rpm
 RUN yum install -y http://archive.mapr.com/releases/v${MAPR_CLUSTER_VERSION}/redhat/mapr-client-6.1.0.20180926230239.GA-1.x86_64.rpm
+RUN pip install --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python
 
 RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.2/rpm/el7/streamsets-datacollector-3.5.2-el7-all-rpms.tar && \
     tar xf streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
