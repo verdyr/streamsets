@@ -54,8 +54,8 @@ ENV JAVA_VERSION_MAJOR=8 \
     SDC_CONF_HTTPS_PORT=7443 \
     SDC_HOME=/opt/streamsets-datacollector \ 
     SDC_DATA=/data \ 
-    SDC_DIST="/opt/streamsets-datacollector" \
-    STREAMSETS_LIBRARIES_EXTRA_DIR="${SDC_DIST}/streamsets-libs-extras" \
+    SDC_DIST=/opt/streamsets-datacollector \
+    STREAMSETS_LIBRARIES_EXTRA_DIR="${SDC_DIST}/streamsets-libs-extras"
     #LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/mapr/lib
     
 
