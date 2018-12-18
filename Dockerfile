@@ -56,7 +56,7 @@ ENV JAVA_VERSION_MAJOR=8 \
     SDC_DATA=/data \ 
     SDC_DIST="/opt/streamsets-datacollector" \
     STREAMSETS_LIBRARIES_EXTRA_DIR="${SDC_DIST}/streamsets-libs-extras" \
-    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/mapr/lib
+    #LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/mapr/lib
     
 
 RUN yum install -y epel-release
@@ -91,7 +91,7 @@ RUN groupadd ${SDC_USER}
 ## mapr specific, separately
 RUN yum install -y http://archive.mapr.com/releases/v${MAPR_CLUSTER_VERSION}/redhat/mapr-librdkafka-0.11.3.201803231414-1.noarch.rpm
 RUN yum install -y http://archive.mapr.com/releases/v${MAPR_CLUSTER_VERSION}/redhat/mapr-client-6.1.0.20180926230239.GA-1.x86_64.rpm
-RUN pip install --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python
+#RUN pip install --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python
 
 RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.2/rpm/el7/streamsets-datacollector-3.5.2-el7-all-rpms.tar && \
     tar xf streamsets-datacollector-3.5.2-el7-all-rpms.tar && \ 
