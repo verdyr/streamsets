@@ -110,6 +110,7 @@ ENV JAVA_MAX_MEM=1200m \
 
 USER verdyr
 EXPOSE 7443
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["dc", "-exec"]
+#COPY docker-entrypoint.sh /
+#ENTRYPOINT ["/docker-entrypoint.sh"]
+#CMD ["dc", "-exec"]
+CMD ["/bin/bash"]
