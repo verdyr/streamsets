@@ -100,19 +100,18 @@ RUN wget -v https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacolle
     rm -f streamsets-datacollector-cdh*.rpm streamsets-datacollector-hdp*.rpm && \
     yum localinstall -y streamsets-datacollector-*.rpm && \
     cd ../ && rm -rf streamsets-datacollector-3.5.2-el7-all-rpms
-
-RUN cd /tmp && \
-    git clone https://github.com/verdyr/streamsets.git
     
-#RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_DIST}/etc/sdc-log4j.properties"
+#RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_CONF}/sdc-log4j.properties"
 RUN ${SDC_DIST}/bin/streamsets setup-mapr
 
 ENV JAVA_MAX_MEM=1200m \
     JAVA_MIN_MEM=1200m
 
-#USER verdyr
+#USER ${SDC_USER}
 EXPOSE 7443
-#COPY docker-entrypoint.sh /
+#COPY mapruserticket /opt/mapr/conf/mapruserticket
+#COPY ssl_truststore /opt/mapr/conf/
+#COPY docker-entrypoint.sh
 #ENTRYPOINT ["/docker-entrypoint.sh"]
-#CMD ["dc", "-exec"]
+#CMD ["/opt/streamsets-datacollector/bin/streamsets", "dc", "-verbose"]
 CMD ["/bin/bash"]
