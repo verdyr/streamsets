@@ -14,7 +14,7 @@ then, from container (replace fqdns)
   
 * ``` export MAPR_TICKETFILE_LOCATION=/mnt/mapruserticket ```
   
-* ``` cp /mnt/{mapruserticket,ssl_truststore} /opt/mapr/conf/ssl_truststore/ ```
+* ``` cp /mnt/{mapruserticket,ssl_truststore} /opt/mapr/conf/ssl_truststore ```
 
 * ``` $SDC_HOME/bin/streamsets dc -verbose ```
 
